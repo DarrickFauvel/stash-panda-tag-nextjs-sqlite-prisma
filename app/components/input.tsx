@@ -17,13 +17,14 @@ export default function InputComponent() {
   };
 
   return (
-    <div>
+    <div className="join w-full">
       <input
         type="text"
         value={labelId}
         onChange={(e) => setLabelId(e.target.value)}
+        className="input input-bordered join-item w-full"
       />
-      <button className="btn" disabled={isDisabled} onClick={handleClick}>
+      <button className="btn join-item" disabled={isDisabled} onClick={handleClick}>
         🔄️
       </button>
     </div>
