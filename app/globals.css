@@ -5,3 +5,31 @@
     dark --prefersdark,
     cupcake;
 }
+
+@media print {
+  @page {
+    /* DYMO File Folder Label: 3 7/16 x 9/16 */
+    size: 3.4375in 0.5625in;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    background-color: white;
+
+    header,
+    footer {
+      display: none;
+    }
+  }
+
+  .label {
+    width: 3.4375in;
+    height: 0.5625in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 1px solid black;
+  }
+}
