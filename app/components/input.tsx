@@ -1,32 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import generateLabelId from "../lib/generate-label-id";
+interface InputComponentProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-export default function InputComponent() {
-  const [labelId, setLabelId] = useState(generateLabelId("A1"));
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  const handleClick = () => {
-    setIsDisabled(true);
-    setLabelId(generateLabelId("B1"));
-
-    setTimeout(() => {
-      setIsDisabled(false);
-    }, 1000);
-  };
-
+export default function InputComponent({ value, onChange }: InputComponentProps) {
   return (
-    <div className="join w-full">
-      <input
-        type="text"
-        value={labelId}
-        onChange={(e) => setLabelId(e.target.value)}
-        className="input input-bordered join-item w-full"
-      />
-      <button className="btn join-item" disabled={isDisabled} onClick={handleClick}>
-        🔄️
-      </button>
-    </div>
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="bg-white text-black text-center text-2xl rounded-lg shadow-md border-2 border-dashed border-black/25 hover:border-black/50 focus:border-solid focus:border-black/60 focus:outline-none transition-colors"
+      style={{ width: "3.4375in", height: "0.5625in", maxWidth: "100%" }}
+    />
   );
 }
