@@ -1,4 +1,5 @@
 import Link from "next/link";
+import IntroModalComponent from "./modal-intro";
 
 export default function HeaderComponent() {
   return (
@@ -12,7 +13,8 @@ export default function HeaderComponent() {
         <div className="navbar-center">
           <span className="badge badge-success gap-1">🖨️ DYMO Ready</span>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-1">
+          <IntroModalComponent />
           <Link href="/settings" className="btn btn-ghost btn-sm hidden sm:flex">
             ⚙️ Settings
           </Link>
