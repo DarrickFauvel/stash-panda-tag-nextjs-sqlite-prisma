@@ -1,16 +1,24 @@
 import Link from "next/link";
+import IntroModalComponent from "./modal-intro";
 
 export default function HeaderComponent() {
   return (
     <header>
-      <nav className="flex justify-between @container p-4">
-        <Link href="/">
-          🐼 <span className="hidden @3xs:inline">Stash Panda Tag</span>
-        </Link>
-        <span>🖨️ DYMO Ready</span>
-        <Link href="/settings" className="hidden @sm:inline">
-          ⚙️ Settings
-        </Link>
+      <nav className="navbar bg-base-100 shadow-sm px-4">
+        <div className="navbar-start">
+          <Link href="/" className="text-lg font-semibold">
+            🐼 <span className="hidden sm:inline">Stash Panda Tag</span>
+          </Link>
+        </div>
+        <div className="navbar-center">
+          <span className="badge badge-success gap-1">🖨️ DYMO Ready</span>
+        </div>
+        <div className="navbar-end gap-1">
+          <IntroModalComponent />
+          <Link href="/settings" className="btn btn-ghost btn-sm hidden sm:flex">
+            ⚙️ Settings
+          </Link>
+        </div>
       </nav>
     </header>
   );
