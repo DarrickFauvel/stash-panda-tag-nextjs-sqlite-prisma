@@ -37,7 +37,7 @@ export default function GenerateNewLabelCardComponent() {
 
   return (
     <div className="card bg-primary text-primary-content w-full max-w-2xl">
-      <div className="card-body gap-4">
+      <div className="card-body gap-4 p-4 sm:p-8">
         <div>
           <h2 className="card-title text-xl">Generate New Label</h2>
           <p className="opacity-80 text-sm">
@@ -50,7 +50,7 @@ export default function GenerateNewLabelCardComponent() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 overflow-x-auto">
             {/* Label preview — segmented inputs */}
             <div
               className="flex items-center justify-center bg-white rounded-lg shadow-md border-2 border-dashed border-black/25 hover:border-black/50 focus-within:border-solid focus-within:border-black/60 transition-colors overflow-hidden px-2"
