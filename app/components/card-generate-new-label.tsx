@@ -1,16 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import generateLabelId from "../lib/generate-label-id";
 
 const segmentInputClass =
-  "bg-transparent text-black text-center text-2xl focus:outline-none h-full";
+  "bg-transparent text-black text-center text-2xl focus:outline-none h-full px-0 [field-sizing:content]";
 
 export default function GenerateNewLabelCardComponent() {
   const [labelId, setLabelId] = useState(generateLabelId("A1"));
   const [isDisabled, setIsDisabled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const [location, date, time] = labelId.split("-");
+
+  useLayoutEffect(() => {
+    const saved = localStorage.getItem("lastLocation");
+    setLabelId(generateLabelId(saved ?? "A1"));
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("lastLocation", location);
+  }, [location]);
 
   const updateSegment = (index: number, value: string) => {
     const parts = labelId.split("-");
@@ -20,7 +31,7 @@ export default function GenerateNewLabelCardComponent() {
 
   const handleRegenerate = () => {
     setIsDisabled(true);
-    setLabelId(generateLabelId("B1"));
+    setLabelId(generateLabelId(location));
     setTimeout(() => setIsDisabled(false), 1000);
   };
 
@@ -42,32 +53,38 @@ export default function GenerateNewLabelCardComponent() {
           <div className="flex flex-col gap-1">
             {/* Label preview — segmented inputs */}
             <div
-              className="flex items-center bg-white rounded-lg shadow-md border-2 border-dashed border-black/25 hover:border-black/50 focus-within:border-solid focus-within:border-black/60 transition-colors overflow-hidden px-2"
-              style={{ width: "3.4375in", height: "0.5625in", maxWidth: "100%" }}
+              className="flex items-center justify-center bg-white rounded-lg shadow-md border-2 border-dashed border-black/25 hover:border-black/50 focus-within:border-solid focus-within:border-black/60 transition-colors overflow-hidden px-2"
+              style={{
+                width: "3.4375in",
+                height: "0.5625in",
+                maxWidth: "100%",
+                fontFamily: '"Segoe UI", sans-serif',
+                fontWeight: "bold",
+                visibility: mounted ? "visible" : "hidden",
+              }}
             >
               <input
                 value={location}
                 onChange={(e) => updateSegment(0, e.target.value)}
-                className={`${segmentInputClass} min-w-0 shrink-0`}
-                style={{ width: "0.65in" }}
-                size={1}
+                className={`${segmentInputClass} shrink-0`}
                 aria-label="Location"
               />
-              <span className="text-black text-2xl select-none shrink-0 px-1">-</span>
+              <span className="text-black text-2xl select-none shrink-0 px-1">
+                -
+              </span>
               <input
                 value={date}
                 onChange={(e) => updateSegment(1, e.target.value)}
-                className={`${segmentInputClass} flex-1 min-w-0`}
-                size={1}
+                className={`${segmentInputClass} shrink-0`}
                 aria-label="Date"
               />
-              <span className="text-black text-2xl select-none shrink-0 px-1">-</span>
+              <span className="text-black text-2xl select-none shrink-0 px-1">
+                -
+              </span>
               <input
                 value={time}
                 onChange={(e) => updateSegment(2, e.target.value)}
-                className={`${segmentInputClass} min-w-0 shrink-0`}
-                style={{ width: "0.85in" }}
-                size={1}
+                className={`${segmentInputClass} shrink-0`}
                 aria-label="Time"
               />
             </div>
@@ -77,11 +94,15 @@ export default function GenerateNewLabelCardComponent() {
               className="flex text-xs text-primary-content/60 font-medium select-none"
               style={{ width: "3.4375in", maxWidth: "100%" }}
             >
-              <span className="text-center" style={{ width: "0.65in" }}>Location</span>
+              <span className="text-center" style={{ width: "0.65in" }}>
+                Location
+              </span>
               <span className="opacity-0 px-1">-</span>
               <span className="flex-1 text-center">Date (Y/M/D)</span>
               <span className="opacity-0 px-1">-</span>
-              <span className="text-center" style={{ width: "0.85in" }}>Time (24h)</span>
+              <span className="text-center" style={{ width: "0.85in" }}>
+                Time (24h)
+              </span>
             </div>
           </div>
 
@@ -91,7 +112,7 @@ export default function GenerateNewLabelCardComponent() {
               window.open(
                 `/label?id=${encodeURIComponent(labelId)}`,
                 "_blank",
-                "popup,width=600,height=300"
+                "popup,width=600,height=300",
               )
             }
           >
