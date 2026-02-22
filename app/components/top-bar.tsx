@@ -8,7 +8,7 @@ export default function HeaderComponent() {
       <nav className="navbar bg-base-100 shadow-sm px-4 @container">
         <div className="navbar-start">
           <Link href="/" className="text-lg font-semibold">
-            🐼 <span className="hidden @lg:inline">Stash Panda Tag</span>
+            🦝 <span className="hidden @lg:inline">Stash Panda Tag</span>
           </Link>
         </div>
         <div className="navbar-center">
