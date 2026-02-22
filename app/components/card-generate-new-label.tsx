@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import generateLabelId from "../lib/generate-label-id";
 
 const segmentInputClass =
-  "bg-transparent text-black text-center text-2xl focus:outline-none h-full px-0 [field-sizing:content]";
+  "bg-transparent text-black text-center focus:outline-none h-full px-0 [field-sizing:content]";
 
 export default function GenerateNewLabelCardComponent() {
   const [labelId, setLabelId] = useState(generateLabelId("A1"));
@@ -50,16 +50,19 @@ export default function GenerateNewLabelCardComponent() {
         </p>
 
         <div className="flex flex-col @sm:flex-row gap-4 @sm:items-start">
-          <div className="flex flex-col gap-1 overflow-x-auto">
+          {/* Outer div is the container so cqi units inside reference label width */}
+          <div
+            className="@container/label flex flex-col gap-1"
+            style={{ width: "3.4375in", maxWidth: "100%" }}
+          >
             {/* Label preview — segmented inputs */}
             <div
               className="flex items-center justify-center bg-white rounded-lg shadow-md border-2 border-dashed border-black/25 hover:border-black/50 focus-within:border-solid focus-within:border-black/60 transition-colors overflow-hidden px-2"
               style={{
-                width: "3.4375in",
                 height: "0.5625in",
-                maxWidth: "100%",
                 fontFamily: '"Segoe UI", sans-serif',
                 fontWeight: "bold",
+                fontSize: "clamp(12px, 7.3cqi, 24px)",
                 visibility: mounted ? "visible" : "hidden",
               }}
             >
@@ -69,18 +72,14 @@ export default function GenerateNewLabelCardComponent() {
                 className={`${segmentInputClass} shrink-0`}
                 aria-label="Location"
               />
-              <span className="text-black text-2xl select-none shrink-0 px-1">
-                -
-              </span>
+              <span className="text-black select-none shrink-0 px-1">-</span>
               <input
                 value={date}
                 onChange={(e) => updateSegment(1, e.target.value)}
                 className={`${segmentInputClass} shrink-0`}
                 aria-label="Date"
               />
-              <span className="text-black text-2xl select-none shrink-0 px-1">
-                -
-              </span>
+              <span className="text-black select-none shrink-0 px-1">-</span>
               <input
                 value={time}
                 onChange={(e) => updateSegment(2, e.target.value)}
@@ -90,10 +89,7 @@ export default function GenerateNewLabelCardComponent() {
             </div>
 
             {/* Segment labels */}
-            <div
-              className="flex text-xs text-primary-content/60 font-medium select-none"
-              style={{ width: "3.4375in", maxWidth: "100%" }}
-            >
+            <div className="flex text-xs text-primary-content/60 font-medium select-none">
               <span className="text-center" style={{ width: "0.65in" }}>
                 Location
               </span>
