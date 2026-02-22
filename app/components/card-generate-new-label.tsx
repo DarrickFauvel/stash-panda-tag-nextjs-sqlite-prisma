@@ -36,8 +36,8 @@ export default function GenerateNewLabelCardComponent() {
   };
 
   return (
-    <div className="card bg-primary text-primary-content w-full max-w-2xl">
-      <div className="card-body gap-4 p-4 sm:p-8">
+    <div className="@container card bg-primary text-primary-content w-full max-w-2xl">
+      <div className="card-body gap-4 p-4 @sm:p-8">
         <div>
           <h2 className="card-title text-xl">Generate New Label</h2>
           <p className="opacity-80 text-sm">
@@ -49,7 +49,7 @@ export default function GenerateNewLabelCardComponent() {
           Label Preview — click or tab to edit
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
+        <div className="flex flex-col @sm:flex-row gap-4 @sm:items-start">
           <div className="flex flex-col gap-1 overflow-x-auto">
             {/* Label preview — segmented inputs */}
             <div
@@ -107,7 +107,7 @@ export default function GenerateNewLabelCardComponent() {
           </div>
 
           <button
-            className="btn btn-neutral btn-lg w-full sm:w-auto"
+            className="btn btn-neutral btn-lg w-full @sm:w-auto"
             onClick={() =>
               window.open(
                 `/label?id=${encodeURIComponent(labelId)}`,
