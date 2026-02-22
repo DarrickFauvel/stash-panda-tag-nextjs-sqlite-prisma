@@ -26,7 +26,7 @@ export default function IntroModalComponent() {
         ref={modalRef}
       >
         <div className="modal-box max-w-md">
-          <h2 className="text-2xl font-bold mb-1">🐼 Welcome to Stash Panda Tag</h2>
+          <h2 className="text-2xl font-bold mb-1">🦝 Welcome to Stash Panda Tag</h2>
           <p className="text-base-content/70 text-sm mb-6">
             Generate and print unique labels for your stored items using a
             connected DYMO label printer.
