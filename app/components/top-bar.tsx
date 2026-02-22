@@ -1,5 +1,6 @@
 import Link from "next/link";
 import IntroModalComponent from "./modal-intro";
+import ThemeToggle from "./theme-toggle";
 
 export default function HeaderComponent() {
   return (
@@ -10,10 +11,11 @@ export default function HeaderComponent() {
             🦝 <span className="hidden sm:inline">Stash Panda Tag</span>
           </Link>
         </div>
-        <div className="navbar-center">
+        <div className="navbar-center hidden sm:flex">
           <span className="badge badge-success gap-1">🖨️ DYMO Ready</span>
         </div>
         <div className="navbar-end gap-1">
+          <ThemeToggle />
           <IntroModalComponent />
           <Link href="/settings" className="btn btn-ghost btn-sm hidden sm:flex">
             ⚙️ Settings
